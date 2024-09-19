@@ -18,7 +18,7 @@
               <table id="myTable" class="table table-striped table-bordered" style="width:100%;">
                 <thead>
                   <tr>
-                    <th width="5%">No</th>
+                    <th width="1%">No</th>
                     <th>Nama</th>
                     <th>Slug</th>
                     <th>Waktu</th>
