@@ -47,14 +47,14 @@ $film = query("SELECT f.id_film, f.title, f.studio, f.created_at, f.private, k.n
                                                 title="Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit-kategori.php?id=<?= $films['id_film']; ?>"
+                                            <a href="edit-film.php?id=<?= $films['id_film']; ?>"
                                                 class="badge bg-warning border-0 text-decoration-none me-2"
                                                 title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="hapus-kategori.php?id=<?= $films['id_film']; ?>"
+                                            <a href="hapus-film.php?id=<?= $films['id_film']; ?>"
                                                 class="badge bg-danger border-0 text-decoration-none"
-                                                onclick="return confirm('Yakin ingin menghapus kategori?')"
+                                                onclick="return confirm('Yakin ingin menghapus film?')"
                                                 title="Hapus">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>

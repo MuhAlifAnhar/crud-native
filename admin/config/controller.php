@@ -75,6 +75,7 @@ function query($query){
         $deskripsi = sanitize($data['deskripsi']);
         $tanggal_rilis = sanitize($data['tanggal_rilis']);
         $studio = sanitize($data['studio']);
+        $status = sanitize($data['private']);
         $kategori_id = sanitize($data['kategori_id']);
 
         // $query = "INSERT INTO film (kategori_id, title, slug, deskripsi, tanggal_rilis, studio) VALUES ('$kategori_id', '$title', '$slug', '$deskripsi', '$tanggal_rilis', '$studio')";
@@ -82,11 +83,41 @@ function query($query){
 
         // return mysqli_affected_rows($database);
 
-        $stmt = $database->prepare("INSERT INTO film (kategori_id, link, title, slug, deskripsi, tanggal_rilis, studio) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $kategori_id, $link, $title, $slug, $deskripsi, $tanggal_rilis, $studio);
+        $stmt = $database->prepare("INSERT INTO film (kategori_id, link, title, slug, deskripsi, tanggal_rilis, studio, private) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $kategori_id, $link, $title, $slug, $deskripsi, $tanggal_rilis, $studio, $status);
         $stmt->execute();
 
         return $stmt->affected_rows;
     }
+
+    function delete_film($id){
+        global $database;
+
+        $stmt = $database->prepare("DELETE FROM film WHERE id_film = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+    }
+
+    function edit_film($id, $data){
+        global $database;
+
+        $link = sanitize($data['link']);
+        $title = sanitize($data['title']);
+        $slug = sanitize($data['slug']);
+        $deskripsi = sanitize($data['deskripsi']);
+        $tanggal_rilis = sanitize($data['tanggal_rilis']);
+        $studio = sanitize($data['studio']);
+        $status = sanitize($data['private']);
+        $kategori_id = sanitize($data['kategori_id']);
+
+        $stmt = $database->prepare("UPDATE film SET link = ?, title = ?, slug = ?, deskripsi = ?, tanggal_rilis = ?, studio = ?, kategori_id = ?, private = ? WHERE id_film = ?");
+        $stmt->bind_param("ssssssssi", $link, $title, $slug, $deskripsi, $tanggal_rilis, $studio, $kategori_id, $status, $id);
+        $stmt->execute();
+
+    return $stmt->affected_rows;
+    }
+
 
 ?>
