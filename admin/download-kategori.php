@@ -9,9 +9,17 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $spreadsheet = new Spreadsheet();
 $activeWorksheet = $spreadsheet->getActiveSheet();
 $activeWorksheet->setCellValue('A2', 'No')->getColumnDimension('A')->setAutoSize(true);
-$activeWorksheet->setCellValue('B2', 'Title')->getColumnDimension('B')->setAutoSize(true);
+$activeWorksheet->setCellValue('B2', 'Nama')->getColumnDimension('B')->setAutoSize(true);
 $activeWorksheet->setCellValue('C2', 'Slug')->getColumnDimension('C')->setAutoSize(true);
-$activeWorksheet->setCellValue('D2', 'Created At')->getColumnDimension('D')->setAutoSize(true);
+$activeWorksheet->setCellValue('D2', 'Waktu')->getColumnDimension('D')->setAutoSize(true);
+
+$styleBorder = [
+    'borders' => [
+        'allBorders' => [
+            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ],
+    ],
+];
 
 $no = 1;
 $loc = 3;
@@ -26,6 +34,7 @@ foreach ($kategori as $key) {
     $loc++;
 }
 
+$activeWorksheet->getStyle('A2:D'. ($loc - 1))->applyFromArray($styleBorder);
 
 $penulisan = new Xlsx($spreadsheet);
 $nama_file = "Kategori_List.xlsx";

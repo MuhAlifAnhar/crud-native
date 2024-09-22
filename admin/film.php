@@ -18,6 +18,7 @@ $film = query("SELECT f.id_film, f.title, f.studio, f.created_at, f.private, k.n
                         <div class="table-responsive">
                             <a href="bikin-film.php" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Buat
                                 Film</a>
+                                <a href="download-film.php" class="btn btn-warning mb-3"><i class="fas fa-plus"></i> Download</a>
                             <table id="myTable" class="table table-striped table-bordered" style="width:100%;">
                                 <thead>
                                     <tr>
