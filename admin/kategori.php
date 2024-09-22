@@ -15,6 +15,7 @@
           <div class="card-body shadow-sm">
             <div class="table-responsive">
               <a href="bikin-kategori.php" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Buat Kategori</a>
+              <a href="download-kategori.php" class="btn btn-warning mb-3"><i class="fas fa-plus"></i> Download</a>
               <table id="myTable" class="table table-striped table-bordered" style="width:100%;">
                 <thead>
                   <tr>
