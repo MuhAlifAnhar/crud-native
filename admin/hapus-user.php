@@ -10,17 +10,17 @@ if (!isset($_SESSION["login"])) {
 
 require "config/app.php";
 
-$id_kategori = $_GET['id'];
+$id_user = $_GET['id'];
 
-if(delete_kategori($id_kategori) > 0){
+if(delete_user($id_user) > 0){
     echo "<script>
-                alert('Kategori berhasil dihapus');
-                document.location.href = 'kategori.php';
+                alert('User berhasil dihapus');
+                document.location.href = 'user.php';
                 </script>";
 }else {
     echo "<script>
-                alert('Kategori gagal dihapus');
-                document.location.href = 'kategori.php';
+                alert('User gagal dihapus');
+                document.location.href = 'user.php';
                 </script>";
 }
 ?>

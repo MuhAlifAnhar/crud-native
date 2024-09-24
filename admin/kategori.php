@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+            alert('Anda harus login dulu');
+            document.location.href = 'login.php';
+            </script>";
+    exit;
+}
+
   $title = "Kategori";
   require "../layout/header.php";
   $kategori = query("SELECT * FROM kategori ORDER BY create_at DESC");
@@ -23,7 +32,7 @@
                     <th>Nama</th>
                     <th>Slug</th>
                     <th>Waktu</th>
-                    <th>Keterangan</th>
+                    <th width="20%">Keterangan</th>
                   </tr>
                 </thead>
                 <tbody>

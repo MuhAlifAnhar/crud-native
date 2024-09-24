@@ -119,5 +119,46 @@ function query($query){
     return $stmt->affected_rows;
     }
 
+    function store_user($data){
+            global $database;
+            
+            $username = sanitize($data['username']);
+            $email = sanitize($data['email']);
+            $password = sanitize(password_hash($data['password'], PASSWORD_DEFAULT));
+            $role = sanitize($data['role']);
+
+            $stmt = $database->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $username, $email, $password, $role);
+            $stmt->execute();
+
+        return $stmt->affected_rows;
+        }
+
+        function delete_user($id){
+        global $database;
+
+        $stmt = $database->prepare("DELETE FROM users WHERE id_user = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+        }
+
+        function edit_user($id, $data){
+        global $database;
+
+        $username = sanitize($data['username']);
+        $email = sanitize($data['email']);
+        $password = sanitize(password_hash($data['password'], PASSWORD_DEFAULT));
+        $role = sanitize($data['role']);
+
+        $stmt = $database->prepare("UPDATE users SET username = ?, email = ?, password = ?, role = ? WHERE id_user = ?");
+        $stmt->bind_param("ssssi", $username, $email, $password, $role, $id);
+        $stmt->execute();
+
+        return $stmt->affected_rows;
+        }
+        
+
 
 ?>

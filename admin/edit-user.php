@@ -8,40 +8,41 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-$title = "Edit Kategori";
+$title = "Edit User";
 require "../layout/header.php";
+// $kategori = query("SELECT * FROM kategori ORDER BY create_at DESC");
 
 if (!isset($_GET['id'])) {
     echo "<script>
-            alert('ID kategori tidak tersedia');
-            document.location.href = 'kategori.php';
+            alert('ID user tidak tersedia');
+            document.location.href = 'user.php';
             </script>";
     exit;
 }
 
 $id = $_GET['id'];
 
-$data = query("SELECT * FROM kategori WHERE id_kategori = $id");
+$data = query("SELECT * FROM users WHERE id_user = $id");
 if (empty($data)) {
     echo "<script>
-            alert('Kategori tidak ditemukan');
-            document.location.href = 'kategori.php';
+            alert('User tidak ditemukan');
+            document.location.href = 'user.php';
             </script>";
     exit;
 }
 
-$category = $data[0];
+$user = $data[0];
 
 if (isset($_POST['submit'])) {
-    if (edit_kategori($id, $_POST) > 0) {
+    if (edit_user($id, $_POST) > 0) {
         echo "<script>
-                alert('Kategori berhasil diperbarui');
-                document.location.href = 'kategori.php';
+                alert('User berhasil diperbarui');
+                document.location.href = 'user.php';
                 </script>";
     } else {
         echo "<script>
-                alert('Kategori gagal diperbarui');
-                document.location.href = 'edit-kategori.php?id=$id';
+                alert('User gagal diperbarui');
+                document.location.href = 'edit-user.php?id=$id';
                 </script>";
 
         echo mysqli_error($database);
@@ -61,13 +62,25 @@ if (isset($_POST['submit'])) {
           <div class="card-body shadow-sm">
             <form action="" method="POST">
                 <div class="mb-3">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($category['name']); ?>" required>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="<?= htmlspecialchars($user['username']); ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="slug">Slug</label>
-                    <input type="text" class="form-control" id="slug" name="slug" value="<?= htmlspecialchars($category['slug']); ?>" readonly>
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['email']); ?>" required>
                 </div>
+                <div class="mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                        <label for="role">Role</label>
+                        <select name="role" id="role" class="form-select" required>
+                            <option value="" hidden>--Silahkan Pilih--</option>
+                            <option value="0" <?= $user['role'] == 0 ? 'selected' : ''; ?>>Operator</option>
+                            <option value="1" <?= $user['role'] == 1 ? 'selected' : ''; ?>>Admin</option>
+                        </select>
+                    </div>
                 <div class="float-end">
                     <button type="submit" class="btn btn-success" name="submit"><i class="fas fa-save"></i> Simpan
                 </button>
